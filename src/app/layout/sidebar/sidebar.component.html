@@ -1,0 +1,39 @@
+<div class="aside-inner">
+  <ul nz-menu [nzMode]="'inline'" nzTheme='light'>
+    <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+      <a [routerLink]="['/dashboard']"><i class="anticon anticon-dashboard"></i><span>仪表盘</span></a>
+    </li>
+    <li nz-submenu [(nzOpen)]="openMap.sub1" (nzOpenChange)="openHandler('sub1')">
+      <span title>
+        <i class="anticon anticon-appstore"></i>
+        <span>任务列表</span>
+      </span>
+      <ul>
+        <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+          <a [routerLink]="['/tasks/upload']"><i nz-icon [nzType]="'upload'" [nzTheme]="'outline'"></i><span>文件上传</span></a>
+        </li>
+        <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+          <a [routerLink]="['/tasks/annotation']"><i nz-icon [nzType]="'api'" [nzTheme]="'outline'"></i><span>添加注解</span></a>
+        </li>
+        <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+          <a [routerLink]="['/tasks/generate']"><i nz-icon [nzType]="'export'" [nzTheme]="'outline'"></i><span>生成后台</span></a>
+        </li>
+        <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+          <a [routerLink]="['/tasks/download']"><i nz-icon [nzType]="'download'" [nzTheme]="'outline'"></i><span>打包下载</span></a>
+        </li>
+        
+      </ul>
+    </li>
+    <li nz-submenu [(nzOpen)]="openMap.sub2" (nzOpenChange)="openHandler('sub2')">
+      <span title>
+        <i class="anticon anticon-setting"></i>
+        <span>系统设置</span>
+      </span>
+      <ul>
+        <li nz-menu-item routerLinkActive="ant-menu-item-selected">
+          <a [routerLink]="['/management']"><i class="anticon anticon-team"></i><span>用户管理</span></a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
