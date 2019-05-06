@@ -7,10 +7,39 @@
       <a [routerLink]="['/']">首页</a>
     </nz-breadcrumb-item>
     <nz-breadcrumb-item>
-      生成后台
+      生成文件
     </nz-breadcrumb-item>
   </nz-breadcrumb>
 </div>
 <nz-card [nzBordered]="false" nzTitle="生成后台">
-  生成后台
+  <nz-card>
+    <nz-steps [nzCurrent]="currentStep">
+      <nz-step nzTitle="生成Dao" nzDescription="domain生成dao."></nz-step>
+      <nz-step nzTitle="生成Service" nzDescription="dao生成service."></nz-step>
+      <nz-step nzTitle="生成Controller" nzDescription="service生成controller."></nz-step>
+    </nz-steps>
+  </nz-card>
+
+  <nz-card style="margin-top: 24px;">
+    <div [hidden]="currentStep != 0">
+      <app-dao></app-dao>
+      <div class="actions">
+        <button nz-button (click)="nextStep()" [nzType]="'primary'">下一步</button>
+      </div>
+    </div>
+    <div [hidden]="currentStep != 1">
+      <app-service></app-service>
+      <div class="actions">
+        <button nz-button (click)="prevStep()" nzType="default">上一步</button>
+        <button nz-button (click)="nextStep()" [nzType]="'primary'">下一步</button>
+      </div>
+    </div>
+    <div [hidden]="currentStep != 2">
+      <app-controller></app-controller>
+      <div class="actions">
+        <button nz-button (click)="prevStep()" nzType="default">上一步</button>
+        <button nz-button (click)="nextStep()" [nzType]="'primary'">完成</button>
+      </div>
+    </div>
+  </nz-card>
 </nz-card>

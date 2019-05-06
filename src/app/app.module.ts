@@ -12,7 +12,6 @@ import { PageModule } from './page/page.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
-
 registerLocaleData(zh);
 
 @NgModule({

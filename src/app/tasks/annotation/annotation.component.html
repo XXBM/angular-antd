@@ -12,5 +12,54 @@
   </nz-breadcrumb>
 </div>
 <nz-card [nzBordered]="false" nzTitle="添加注解">
-  添加注解
+  <div>
+    <nz-select
+      style="width: 200px;"
+      [(ngModel)]="selectedValue"
+      nzPlaceHolder="Select domain"
+      (ngModelChange)="select()"
+      nzAllowClear
+    >
+      <nz-option *ngFor="let o of heroes" [nzValue]="o" [nzLabel]="o"></nz-option>
+    </nz-select>
+  </div>
+  <div><p></p><p></p></div>
+  <div>
+    <nz-table
+      #ajaxTable
+      nzShowSizeChanger
+      nzBordered
+      [nzFrontPagination]="false"
+      [nzData]="listOfData"
+      [nzLoading]="loading"
+      [nzTotal]="total"
+      [nzTitle]="title"
+      [(nzPageIndex)]="pageIndex"
+      [(nzPageSize)]="pageSize"
+      (nzPageIndexChange)="searchData()"
+      (nzPageSizeChange)="searchData(true)"
+    >
+      <thead>
+      <tr>
+        <th nzShowSort nzSortKey="id">ID</th>
+        <th nzShowSort nzSortKey="name"><span>字段</span></th>
+        <th nzShowSort nzSortKey="name"><span>类型</span></th>
+        <th nzShowSort nzSortKey="annotationBtn"><span>注解</span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of ajaxTable.data">
+        <td>{{ data.id }}</td>
+        <td>{{ data.description }}</td>
+        <td>{{ data.name }}</td>
+        <td>
+          <button nz-button [nzType]="'primary'" (click)="showModal()"><span>添加注解</span></button>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <app-annotation-dialog></app-annotation-dialog>
+    </nz-modal>
+  </div>
 </nz-card>
