@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TestService } from '../core/test/test.service';
+import { UploadService } from '../core/upload/upload.service';
 import {NzMessageService} from 'ng-zorro-antd';
 @Component({
   selector: 'app-dashboard',
@@ -7,23 +7,19 @@ import {NzMessageService} from 'ng-zorro-antd';
   styleUrls: ['./dashboard.component.less']
 })
 export class DashboardComponent implements OnInit {
-  heroes: string[];
 
-  constructor( private heroService: TestService,
+  constructor( private uploadService: UploadService,
                private message: NzMessageService) { }
 
-  getHeroes(): void {
-    this.heroService.getHeroes().subscribe(
+  clearFile(): void {
+    this.uploadService.clearFile().subscribe(
       data => {
-        this.heroes = data;
+        this.message.success('缓存清楚成功！');
       },
       error => {
-        this.message.error('载入数据错误。');
+        this.message.error('缓存清楚失败！请重试！');
       }
     );
-  }
-  getTest(): void {
-    this.message.info(this.heroes.toString());
   }
 
   ngOnInit(): void {

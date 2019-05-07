@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {NzMessageService} from 'ng-zorro-antd';
-
+import {NzMessageService, UploadFile} from 'ng-zorro-antd';
+import {UploadService} from '../../core/upload/upload.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-upload',
@@ -8,10 +9,13 @@ import {NzMessageService} from 'ng-zorro-antd';
   styleUrls: ['./upload.component.less']
 })
 export class UploadComponent implements OnInit {
+  fileList: any;
 
-  constructor(private msg: NzMessageService) { }
+  constructor(private msg: NzMessageService,
+              private uploadService: UploadService) { }
 
   ngOnInit() {
+    this.fileList = this.uploadService.getDomainFile();
   }
 
   handleChange({ file, fileList }: { [key: string]: any }): void {
