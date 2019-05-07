@@ -44,7 +44,8 @@
         <th nzShowSort nzSortKey="id">ID</th>
         <th nzShowSort nzSortKey="name"><span>字段</span></th>
         <th nzShowSort nzSortKey="name"><span>类型</span></th>
-        <th nzShowSort nzSortKey="annotationBtn"><span>注解</span></th>
+        <th nzShowSort nzSortKey="annotations"><span>注解</span></th>
+        <th nzShowSort nzSortKey="annotationBtn"><span>添加注解</span></th>
       </tr>
       </thead>
       <tbody>
@@ -53,7 +54,12 @@
         <td>{{ data.description }}</td>
         <td>{{ data.name }}</td>
         <td>
-          <button nz-button [nzType]="'primary'" (click)="showModal()"><span>添加注解</span></button>
+
+        </td>
+        <td>
+          <div class="editable-row-operations">
+
+          </div>
         </td>
       </tr>
       </tbody>

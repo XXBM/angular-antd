@@ -26,6 +26,11 @@ export class AnnotationComponent implements OnInit {
   /*标题*/
   title = 'Student' + `<button>hhh</button>`;
 
+  listOfOption = [];
+  listOfSelectedValue: string[] = [];
+
+  editCache: { [key: string]: any } = {};
+
   /*构造器*/
   constructor( private heroService: TestService,
                private message: NzMessageService,
@@ -35,6 +40,7 @@ export class AnnotationComponent implements OnInit {
     this.heroService.getHeroes().subscribe(
       data => {
         this.heroes = data;
+        this.listOfOption = data;
       },
       error => {
         this.message.error('载入数据错误。');
@@ -46,6 +52,7 @@ export class AnnotationComponent implements OnInit {
     this.title = this.selectedValue;
     this.message.info(this.title);
   }
+
 
   /*初始化*/
   ngOnInit() {
@@ -82,6 +89,30 @@ export class AnnotationComponent implements OnInit {
     console.log('Button cancel clicked!');
     this.isVisible = false;
   }
+
+  /*表格内注解下拉框*/
+  isNotSelected(value: string): boolean {
+    return this.listOfSelectedValue.indexOf(value) === -1;
+  }
+
+
+  startEdit(id: string): void {
+    this.editCache[id].edit = true;
+  }
+
+  cancelEdit(id: string): void {
+    const index = this.listOfData.findIndex(item => item.id === id);
+    this.editCache[id] = {
+      data: { ...this.listOfData[index] },
+      edit: false
+    };
+  }
+
+  saveEdit(id: string): void {
+    this.editCache[id].edit = false;
+  }
+
+
 
 
 }
