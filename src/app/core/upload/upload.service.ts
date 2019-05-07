@@ -13,6 +13,7 @@ export class UploadService {
   getDomainFilUrl = '/automation/getDomainFiles';
   constructor(private http: HttpClient) { }
 
+
   /*清除缓存*/
   // tslint:disable-next-line:ban-types
   clearFile(): Observable<Object> {

@@ -18,6 +18,7 @@ export class UploadComponent implements OnInit {
     this.fileList = this.uploadService.getDomainFile();
   }
 
+
   handleChange({ file, fileList }: { [key: string]: any }): void {
     const status = file.status;
     if (status !== 'uploading') {
