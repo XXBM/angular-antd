@@ -40,4 +40,12 @@ export class UploadComponent implements OnInit {
     }
   }
 
+  handleRemove = (file: UploadFile): boolean => {
+      if (file.status === 'removed') {
+        console.log(file.url);
+        console.log(file.name);
+        return true;
+      }
+      return false;
+  }
 }
