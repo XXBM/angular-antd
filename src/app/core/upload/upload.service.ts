@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {UploadFile} from 'ng-zorro-antd';
 
@@ -10,6 +10,7 @@ import {UploadFile} from 'ng-zorro-antd';
 
 export class UploadService {
   clearUrl = '/automation/clear';
+  deleteSingleFileUrl = '/automation/deleteFile'
   getDomainFilUrl = '/automation/getDomainFiles';
   constructor(private http: HttpClient) { }
 
@@ -22,6 +23,12 @@ export class UploadService {
     return this.http.post<Object>(this.clearUrl);
   }
 
+  deleteFile(fileName: string): Observable<any> {
+    // @ts-ignore
+    // tslint:disable-next-line:ban-types
+    const params = new HttpParams().append('fileName', `${fileName}`);
+    return this.http.get(`${this.deleteSingleFileUrl}`, {params});
+  }
 
   /*获取实体类*/
   // @ts-ignore

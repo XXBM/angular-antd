@@ -42,8 +42,8 @@ export class UploadComponent implements OnInit {
 
   handleRemove = (file: UploadFile): boolean => {
       if (file.status === 'removed') {
-        console.log(file.url);
-        console.log(file.name);
+        console.log(file.name)
+        this.uploadService.deleteFile(file.name);
         return true;
       }
       return false;
