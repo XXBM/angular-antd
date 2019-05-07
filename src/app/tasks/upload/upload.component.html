@@ -15,6 +15,7 @@
   <nz-upload
     nzType="drag"
     [nzMultiple]="true"
+    [nzFileList]="fileList"
     [nzLimit]="2"
     nzAction="/automation/moreFileUpload"
     (nzChange)="handleChange($event)"

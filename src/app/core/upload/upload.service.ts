@@ -23,7 +23,9 @@ export class UploadService {
   }
 
   /*获取实体类*/
-  getDomainFile(): Observable<UploadFile[]> {
-    return this.http.get<UploadFile[]>(this.getDomainFilUrl);
+  // @ts-ignore
+  getDomainFile(): Observable<Map<>> {
+    // @ts-ignore
+    return this.http.get<Map<>>(this.getDomainFilUrl);
   }
 }

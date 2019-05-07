@@ -15,7 +15,14 @@ export class UploadComponent implements OnInit {
               private uploadService: UploadService) { }
 
   ngOnInit() {
-    this.fileList = this.uploadService.getDomainFile();
+    this.fileList = [
+      {
+        uid: -1,
+        name: 'xxx.png',
+        status: 'done',
+        url: 'http://www.baidu.com/xxx.png'
+      }
+    ];
   }
 
 
