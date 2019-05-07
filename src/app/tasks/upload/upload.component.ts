@@ -15,6 +15,7 @@ export class UploadComponent implements OnInit {
               private uploadService: UploadService) { }
 
   ngOnInit() {
+
     this.fileList = [
       {
         uid: -1,

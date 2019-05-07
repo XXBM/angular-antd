@@ -22,6 +22,7 @@ export class UploadService {
     return this.http.post<Object>(this.clearUrl);
   }
 
+
   /*获取实体类*/
   // @ts-ignore
   getDomainFile(): Observable<Map<>> {
