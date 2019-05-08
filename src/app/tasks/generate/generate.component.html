@@ -24,14 +24,14 @@
     <div [hidden]="currentStep != 0">
       <app-dao></app-dao>
       <div class="actions">
-        <button nz-button (click)="nextStep()" [nzType]="'primary'">下一步</button>
+        <button nz-button (click)="nextStep()" [nzType]="'primary'">生成</button>
       </div>
     </div>
     <div [hidden]="currentStep != 1">
       <app-service></app-service>
       <div class="actions">
         <button nz-button (click)="prevStep()" nzType="default">上一步</button>
-        <button nz-button (click)="nextStep()" [nzType]="'primary'">下一步</button>
+        <button nz-button (click)="nextStep()" [nzType]="'primary'">生成</button>
       </div>
     </div>
     <div [hidden]="currentStep != 2">
