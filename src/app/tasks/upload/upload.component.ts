@@ -20,13 +20,11 @@ export class UploadComponent implements OnInit {
       {
         uid: -1,
         name: 'xxx.png',
-        status: 'done',
-        url: 'http://www.baidu.com/xxx.png'
+        status: 'done'
       }
     ];
   }
-
-
+  /*文件上传状态*/
   handleChange({ file, fileList }: { [key: string]: any }): void {
     const status = file.status;
     if (status !== 'uploading') {
@@ -40,10 +38,11 @@ export class UploadComponent implements OnInit {
     }
   }
 
+  /*删除单个文件*/
   handleRemove = (file: UploadFile): boolean => {
       if (file.status === 'removed') {
-        console.log(file.name)
-        this.uploadService.deleteFile(file.name);
+        console.log(file.name);
+        this.uploadService.deleteFile(file.name).subscribe();
         return true;
       }
       return false;

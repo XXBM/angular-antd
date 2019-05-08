@@ -10,7 +10,7 @@ import {UploadFile} from 'ng-zorro-antd';
 
 export class UploadService {
   clearUrl = '/automation/clear';
-  deleteSingleFileUrl = '/automation/deleteFile'
+  deleteSingleFileUrl = '/automation/deleteFile';
   getDomainFilUrl = '/automation/getDomainFiles';
   constructor(private http: HttpClient) { }
 
@@ -23,11 +23,11 @@ export class UploadService {
     return this.http.post<Object>(this.clearUrl);
   }
 
-  deleteFile(fileName: string): Observable<any> {
-    // @ts-ignore
-    // tslint:disable-next-line:ban-types
-    const params = new HttpParams().append('fileName', `${fileName}`);
-    return this.http.get(`${this.deleteSingleFileUrl}`, {params});
+  /*删除单个文件*/
+  deleteFile(fileName: string): Observable<{}>  {
+    console.log(fileName);
+    const url = `${this.deleteSingleFileUrl}/?fileName=${fileName}`;
+    return this.http.delete(url);
   }
 
   /*获取实体类*/

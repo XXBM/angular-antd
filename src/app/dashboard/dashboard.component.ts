@@ -10,14 +10,14 @@ export class DashboardComponent implements OnInit {
 
   constructor( private uploadService: UploadService,
                private message: NzMessageService) { }
-
+  /*清空缓存*/
   clearFile(): void {
     this.uploadService.clearFile().subscribe(
       data => {
-        this.message.success('缓存清楚成功！');
+        this.message.success('缓存清空成功！');
       },
       error => {
-        this.message.error('缓存清楚失败！请重试！');
+        this.message.error('缓存清空失败！请重试！');
       }
     );
   }
