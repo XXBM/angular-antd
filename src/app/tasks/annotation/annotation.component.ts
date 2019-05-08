@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TestService} from '../../core/test/test.service';
 import {TableService} from '../../core/test/table.service';
-import {NzMessageService, NzModalModule} from 'ng-zorro-antd';
+import {AddAnnotationService} from '../../core/add-annotation/add-annotation.service';
+import {NzMessageService} from 'ng-zorro-antd';
 
 
 
@@ -11,8 +12,9 @@ import {NzMessageService, NzModalModule} from 'ng-zorro-antd';
   styleUrls: ['./annotation.component.less']
 })
 export class AnnotationComponent implements OnInit {
-  /*下拉框变量*/
-  heroes: string[];
+  /*下拉框变量-所有实体类*/
+  domains: string[];
+
   /*表格变量*/
   selectedValue: string;
   pageIndex = 1;
@@ -25,7 +27,7 @@ export class AnnotationComponent implements OnInit {
   isVisible = false;
 
   /*标题*/
-  title = 'Student' + `<button>hhh</button>`;
+  title = '';
 
   listOfOption = [];
   listOfSelectedValue: string[] = [];
@@ -35,12 +37,13 @@ export class AnnotationComponent implements OnInit {
   /*构造器*/
   constructor( private heroService: TestService,
                private message: NzMessageService,
-               private tableService: TableService) { }
-  /*测试下拉框*/
-  getHeroes(): void {
-    this.heroService.getHeroes().subscribe(
+               private tableService: TableService,
+               private addAnnotationService: AddAnnotationService) { }
+  /*下拉框-所有实体类*/
+  getDomains(): void {
+    this.addAnnotationService.getDomains().subscribe(
       data => {
-        this.heroes = data;
+        this.domains = data;
         this.listOfOption = data;
       },
       error => {
@@ -51,28 +54,28 @@ export class AnnotationComponent implements OnInit {
   /*下拉框选择事件*/
   select(): void {
     this.title = this.selectedValue;
+    this.searchData();
     this.message.info(this.title);
   }
 
 
   /*初始化*/
   ngOnInit() {
-    this.getHeroes();
-    this.searchData();
+    this.getDomains();
   }
 
-  /*测试表格*/
+  /*表格数据-某个实体类的变量*/
   searchData(reset: boolean = false): void {
     if (reset) {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.tableService
-      .getUsers(this.pageIndex, this.pageSize)
+    this.addAnnotationService
+      .getVariables(this.pageIndex, this.pageSize, this.selectedValue)
       .subscribe((data: any) => {
         this.loading = false;
         this.total = data.total;
-        this.listOfData = data.rows;
+        this.listOfData = data.variableDomains;
       });
   }
 

@@ -20,7 +20,7 @@
       (ngModelChange)="select()"
       nzAllowClear
     >
-      <nz-option *ngFor="let o of heroes" [nzValue]="o" [nzLabel]="o"></nz-option>
+      <nz-option *ngFor="let o of domains" [nzValue]="o" [nzLabel]="o"></nz-option>
     </nz-select>
   </div>
   <div><p></p><p></p></div>
@@ -41,18 +41,16 @@
     >
       <thead>
       <tr>
-        <th nzShowSort nzSortKey="id">ID</th>
         <th nzShowSort nzSortKey="name"><span>字段</span></th>
-        <th nzShowSort nzSortKey="name"><span>类型</span></th>
+        <th nzShowSort nzSortKey="type"><span>类型</span></th>
         <th nzShowSort nzSortKey="annotations"><span>注解</span></th>
         <th nzShowSort nzSortKey="annotationBtn"><span>添加注解</span></th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let data of ajaxTable.data">
-        <td>{{ data.id }}</td>
-        <td>{{ data.description }}</td>
         <td>{{ data.name }}</td>
+        <td>{{ data.type }}</td>
         <td>
 
         </td>

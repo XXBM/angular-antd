@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NzMessageService, UploadFile} from 'ng-zorro-antd';
 import {UploadService} from '../../core/upload/upload.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-upload',
@@ -33,12 +32,11 @@ export class UploadComponent implements OnInit {
   handleChange({ file, fileList }: { [key: string]: any }): void {
     const status = file.status;
     if (status !== 'uploading') {
-      console.log(file, fileList);
+
     }
     if (status === 'done') {
       this.msg.success(`${file.name} file uploaded successfully.`);
     } else if (status === 'error') {
-      this.msg.success(file.status);
       this.msg.error(`${file.name} file upload failed.`);
     }
   }
@@ -46,7 +44,6 @@ export class UploadComponent implements OnInit {
   /*删除单个文件*/
   handleRemove = (file: UploadFile): boolean => {
       if (file.status === 'removed') {
-        console.log(file.name);
         this.uploadService.deleteFile(file.name).subscribe();
         return true;
       }

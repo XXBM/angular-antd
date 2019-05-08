@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpEvent, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {UploadFile} from 'ng-zorro-antd';
 
 
 @Injectable({
@@ -25,7 +24,6 @@ export class UploadService {
 
   /*删除单个文件*/
   deleteFile(fileName: string): Observable<{}>  {
-    console.log(fileName);
     const url = `${this.deleteSingleFileUrl}/?fileName=${fileName}`;
     return this.http.delete(url);
   }

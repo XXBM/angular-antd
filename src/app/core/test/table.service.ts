@@ -10,8 +10,8 @@ export class TableService {
   randomUserUrl = '/automation/displayAllAwardsRanks';
 
   getUsers(
-    pageIndex: number = 1,
-    pageSize: number = 10,
+    pageIndex: number,
+    pageSize: number,
   ): Observable<{}> {
     const params = new HttpParams()
       .append('page', `${pageIndex}`)
