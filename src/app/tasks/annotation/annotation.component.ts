@@ -23,8 +23,10 @@ export class AnnotationComponent implements OnInit {
   listOfData = [];
   loading = true;
 
+
   /*弹出框变量*/
   isVisible = false;
+
 
   /*标题*/
   title = '';
@@ -116,6 +118,10 @@ export class AnnotationComponent implements OnInit {
     this.editCache[id].edit = false;
   }
 
+
+  getField(data: any): void {
+   console.log(data.name);
+  }
 
 
 

@@ -41,6 +41,7 @@
     >
       <thead>
       <tr>
+        <th nzShowSort nzSortKey="id">ID</th>
         <th nzShowSort nzSortKey="name"><span>字段</span></th>
         <th nzShowSort nzSortKey="type"><span>类型</span></th>
         <th nzShowSort nzSortKey="annotations"><span>注解</span></th>
@@ -49,10 +50,13 @@
       </thead>
       <tbody>
       <tr *ngFor="let data of ajaxTable.data">
+        <td
+          nzShowCheckbox
+          (nzCheckedChange)="getField(data)"
+        ></td>
         <td>{{ data.name }}</td>
         <td>{{ data.type }}</td>
         <td>
-
         </td>
         <td>
           <div class="editable-row-operations">
