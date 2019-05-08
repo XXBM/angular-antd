@@ -48,7 +48,7 @@ export class DaoComponent implements OnInit {
   }
 
   /*给父组件返回要生成的类名数组*/
-  rightFiles(): string[] {
+  rightDaoFiles(): string[] {
     const str = [];
     // tslint:disable-next-line:forin
     for (const item in this.daosing) {

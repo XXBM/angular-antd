@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {DaoComponent} from './dao/dao.component';
+import {ServiceComponent} from './service/service.component';
+import {ControllerComponent} from './controller/controller.component';
 import {GenerateService} from '../../core/generate/generate.service';
 
 
@@ -17,16 +19,50 @@ export class GenerateComponent implements OnInit {
   @ViewChild('childdao')
   childDao: DaoComponent; // 父组件中获得子组件的引用
 
+  @ViewChild('childservice')
+  childService: ServiceComponent; // 父组件中获得子组件的引用
+
+  @ViewChild('childcontroller')
+  childController: ControllerComponent; // 父组件中获得子组件的引用
+
   ngOnInit() {
   }
-  prevStep() {
-    this.currentStep--;
+
+
+  /*生成dao*/
+  generateDaoFile() {
+    const daoNames: string[] = this.childDao.rightDaoFiles();
+    this.generateService.generateDaoFiles(daoNames).subscribe(
+      data => {
+        this.childService.getDaoWithTitle();
+        this.currentStep++;
+      },
+      error => {
+
+      }
+    );
   }
 
-  nextStep() {
+
+  /*生成service*/
+  generateServiceFile() {
+    const serviceNames: string[] = this.childService.rightServiceFiles();
+    this.generateService.generateServiceFiles(serviceNames).subscribe(
+      data => {
+        this.childController.getServiceWithTitle();
+        this.currentStep++;
+      },
+      error => {
+
+      }
+    );
+  }
+
+  /*生成controller*/
+  generateControllerFile() {
     this.currentStep++;
-    const daoNames: string[] = this.childDao.rightFiles();
-    this.generateService.generateDaoFiles(daoNames).subscribe();
+    const controllerNames: string[] = this.childController.rightControllerFiles();
+    this.generateService.generateControllerFiles(controllerNames).subscribe();
   }
 
 }
