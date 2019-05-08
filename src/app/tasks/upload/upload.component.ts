@@ -9,20 +9,25 @@ import {Observable} from 'rxjs';
   styleUrls: ['./upload.component.less']
 })
 export class UploadComponent implements OnInit {
-  fileList: any;
+  fileList: [];
 
   constructor(private msg: NzMessageService,
               private uploadService: UploadService) { }
 
   ngOnInit() {
+    this.getAllDomains();
+  }
 
-    this.fileList = [
-      {
-        uid: -1,
-        name: 'xxx.png',
-        status: 'done'
+  /*获取上传成功的所有文件*/
+  getAllDomains(): void {
+    this.uploadService.getAllDomainFiles().subscribe(
+      data => {
+        this.fileList = data;
+      },
+      error => {
+        this.msg.error('载入数据错误。');
       }
-    ];
+    );
   }
   /*文件上传状态*/
   handleChange({ file, fileList }: { [key: string]: any }): void {
