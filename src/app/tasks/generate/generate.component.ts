@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {DaoComponent} from './dao/dao.component';
+import {GenerateService} from '../../core/generate/generate.service';
 
 
 @Component({
@@ -7,8 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./generate.component.less']
 })
 export class GenerateComponent implements OnInit {
+  constructor(
+    private generateService: GenerateService
+  ) { }
   currentStep = 0;
-  constructor() { }
+
+  @ViewChild('childdao')
+  childDao: DaoComponent; // 父组件中获得子组件的引用
 
   ngOnInit() {
   }
@@ -18,6 +25,8 @@ export class GenerateComponent implements OnInit {
 
   nextStep() {
     this.currentStep++;
+    const daoNames: string[] = this.childDao.rightFiles();
+    this.generateService.generateDaoFiles(daoNames).subscribe();
   }
 
 }

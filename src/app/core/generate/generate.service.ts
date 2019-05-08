@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 
@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class GenerateService {
   private getDomainNameWithTitleUrl = `/automation/getDomainNamesWithTitle`;
+  private generateDaoUrl = '/automation/generateDaoFile';
   constructor(private http: HttpClient) { }
 
   /*获取所有实体类名*/
@@ -15,4 +16,13 @@ export class GenerateService {
     return this.http.get(this.getDomainNameWithTitleUrl);
   }
 
+
+  /*生成dao*/
+  generateDaoFiles(daoNames: string[]): Observable<{}> {
+    const params = new HttpParams()
+      .append('daoNames', `${daoNames}`);
+    return this.http.get(`${this.generateDaoUrl}`, {
+      params
+    });
+  }
 }

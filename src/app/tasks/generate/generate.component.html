@@ -22,7 +22,7 @@
 
   <nz-card style="margin-top: 24px;">
     <div [hidden]="currentStep != 0">
-      <app-dao></app-dao>
+      <app-dao #childdao></app-dao>
       <div class="actions">
         <button nz-button (click)="nextStep()" [nzType]="'primary'">生成</button>
       </div>
