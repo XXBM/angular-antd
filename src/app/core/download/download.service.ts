@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -7,7 +8,13 @@ import { HttpClient} from '@angular/common/http';
 })
 export class DownloadService {
 
+  downloadUrl = '/automation/download';
   constructor(private http: HttpClient) { }
 
 
+  /*下载*/
+  download(): void {
+    window.location.href = this.downloadUrl;
+  }
 }
+
