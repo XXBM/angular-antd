@@ -10,8 +10,6 @@ import {GenerateService} from '../../../core/generate/generate.service';
 export class DaoComponent implements OnInit {
   /*穿梭框数据*/
   domains: {};
-  /*穿梭时传的数据*/
-  daosing: {};
 
 
   constructor( private message: NzMessageService,
@@ -39,20 +37,30 @@ export class DaoComponent implements OnInit {
   }
 
   /*穿梭时触发的方法*/
-  change(ret: {list}): void {
-    this.daosing = ret.list;
-    console.log(ret);
-    console.log( ret.list);
-    console.log( JSON.stringify(ret.list));
+  // @ts-ignore
+  change(ret: {from, to, list}): void {
+      // tslint:disable-next-line:forin
+      for (const item in this.domains) {
+        for (const i in ret.list) {
+          if (ret.list[i].title === this.domains[item].title) {
+            this.domains[item].direction = ret.to;
+          }
+        }
+      }
+      console.log(ret);
+      console.log( ret.list);
+      console.log( JSON.stringify(ret.list));
 
   }
 
   /*给父组件返回要生成的类名数组*/
-  rightDaoFiles(): string[] {
+    rightDaoFiles(): string[] {
     const str = [];
     // tslint:disable-next-line:forin
-    for (const item in this.daosing) {
-      str.push(this.daosing[item].title);
+    for (const item in this.domains) {
+      if (this.domains[item].direction === 'right') {
+        str.push(this.domains[item].title);
+      }
     }
     return str;
   }

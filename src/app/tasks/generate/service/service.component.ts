@@ -10,8 +10,6 @@ import {GenerateService} from '../../../core/generate/generate.service';
 export class ServiceComponent implements OnInit {
   /*穿梭框数据*/
   daos: {};
-  /*穿梭时传的数据*/
-  servicesing: {};
 
 
   constructor( private message: NzMessageService,
@@ -38,9 +36,18 @@ export class ServiceComponent implements OnInit {
     console.log('nzSelectChange', ret);
   }
 
+
   /*穿梭时触发的方法*/
-  change(ret: {list}): void {
-    this.servicesing = ret.list;
+  // @ts-ignore
+  change(ret: {from, to, list}): void {
+    // tslint:disable-next-line:forin
+    for (const item in this.daos) {
+      for (const i in ret.list) {
+        if (ret.list[i].title === this.daos[item].title) {
+          this.daos[item].direction = ret.to;
+        }
+      }
+    }
     console.log(ret);
     console.log( ret.list);
     console.log( JSON.stringify(ret.list));
@@ -51,8 +58,10 @@ export class ServiceComponent implements OnInit {
   rightServiceFiles(): string[] {
     const str = [];
     // tslint:disable-next-line:forin
-    for (const item in this.servicesing) {
-      str.push(this.servicesing[item].title);
+    for (const item in this.daos) {
+      if (this.daos[item].direction === 'right') {
+        str.push(this.daos[item].title);
+      }
     }
     return str;
   }

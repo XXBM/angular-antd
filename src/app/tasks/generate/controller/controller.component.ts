@@ -11,8 +11,7 @@ export class ControllerComponent implements OnInit {
 
   /*穿梭框数据*/
   services: {};
-  /*穿梭时传的数据*/
-  controllersing: {};
+
 
 
   constructor( private message: NzMessageService,
@@ -39,9 +38,18 @@ export class ControllerComponent implements OnInit {
     console.log('nzSelectChange', ret);
   }
 
+
   /*穿梭时触发的方法*/
-  change(ret: {list}): void {
-    this.controllersing = ret.list;
+  // @ts-ignore
+  change(ret: {from, to, list}): void {
+    // tslint:disable-next-line:forin
+    for (const item in this.services) {
+      for (const i in ret.list) {
+        if (ret.list[i].title === this.services[item].title) {
+          this.services[item].direction = ret.to;
+        }
+      }
+    }
     console.log(ret);
     console.log( ret.list);
     console.log( JSON.stringify(ret.list));
@@ -52,8 +60,10 @@ export class ControllerComponent implements OnInit {
   rightControllerFiles(): string[] {
     const str = [];
     // tslint:disable-next-line:forin
-    for (const item in this.controllersing) {
-      str.push(this.controllersing[item].title);
+    for (const item in this.services) {
+      if (this.services[item].direction === 'right') {
+        str.push(this.services[item].title);
+      }
     }
     return str;
   }

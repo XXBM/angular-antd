@@ -8,7 +8,7 @@ import {UploadService} from '../../core/upload/upload.service';
   styleUrls: ['./upload.component.less']
 })
 export class UploadComponent implements OnInit {
-  fileList: [];
+  fileList: UploadFile[any];
 
   constructor(private msg: NzMessageService,
               private uploadService: UploadService) { }
