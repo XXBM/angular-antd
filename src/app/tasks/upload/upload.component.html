@@ -12,6 +12,7 @@
   </nz-breadcrumb>
 </div>
 <nz-card [nzBordered]="false" nzTitle="文件上传">
+  <div *ngIf="fileList">
   <nz-upload
     nzType="drag"
     [nzMultiple]="true"
@@ -30,4 +31,5 @@
       Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
     </p>
   </nz-upload>
+  </div>
 </nz-card>

@@ -13,61 +13,92 @@
 </div>
 <nz-card [nzBordered]="false" nzTitle="添加注解">
   <div>
-    <nz-select
-      style="width: 200px;"
-      [(ngModel)]="selectedValue"
-      nzPlaceHolder="Select domain"
-      (ngModelChange)="select()"
-      nzAllowClear
-    >
-      <nz-option *ngFor="let o of domains" [nzValue]="o" [nzLabel]="o"></nz-option>
-    </nz-select>
+    <div style="width: 50%;display:inline">
+      <nz-select
+        style="width: 250px;"
+        [(ngModel)]="selectedValue"
+        nzPlaceHolder="Select domain"
+        (ngModelChange)="select()"
+        nzAllowClear
+      >
+        <nz-option *ngFor="let o of domains" [nzValue]="o" [nzLabel]="o"></nz-option>
+      </nz-select>
+    </div>
+    <div *ngIf="isShow" style="width: 50%;display:inline;margin-left: 100px">
+      <button nz-button nzType="primary" [disabled]="isPressAddAnnotation"
+              (click)="handleAddAnnotation()">添加注解
+      </button>
+    </div>
   </div>
-  <div><p></p><p></p></div>
-  <div>
-    <nz-table
-      #ajaxTable
-      nzShowSizeChanger
-      nzBordered
-      [nzFrontPagination]="false"
-      [nzData]="listOfData"
-      [nzLoading]="loading"
-      [nzTotal]="total"
-      [nzTitle]="title"
-      [(nzPageIndex)]="pageIndex"
-      [(nzPageSize)]="pageSize"
-      (nzPageIndexChange)="searchData()"
-      (nzPageSizeChange)="searchData(true)"
-    >
-      <thead>
-      <tr>
-        <th nzShowSort nzSortKey="id">ID</th>
-        <th nzShowSort nzSortKey="name"><span>字段</span></th>
-        <th nzShowSort nzSortKey="type"><span>类型</span></th>
-        <th nzShowSort nzSortKey="annotations"><span>注解</span></th>
-        <th nzShowSort nzSortKey="annotationBtn"><span>添加注解</span></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let data of ajaxTable.data">
-        <td
-          nzShowCheckbox
-          (nzCheckedChange)="getField(data)"
-        ></td>
-        <td>{{ data.name }}</td>
-        <td>{{ data.type }}</td>
-        <td>
-        </td>
-        <td>
-          <div class="editable-row-operations">
 
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </nz-table>
-    <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-      <app-annotation-dialog></app-annotation-dialog>
-    </nz-modal>
+  <div *ngIf="isShow">
+    <div>
+        <nz-card  nzTitle="备选类注解" style="margin-top: 24px;">
+          <app-class-annotation-tag [classAnnotationTags]="webClassAnnotationTags"
+                                    #classAnnotationTagComponent></app-class-annotation-tag>
+        </nz-card>
+        <nz-card  nzTitle="备选属性注解">
+          <app-annotation-tag [annotationTags]="webVariableAnnotationTags" [filedAnnotationMap]="filedAnnotationMap"
+                              [isTableRowTag]="false" [isCheckable]="isPressAddAnnotation"
+                              (buttonStatusChange)="handleBtnStatusChanges($event)"
+                              #annotationTagComponent></app-annotation-tag>
+        </nz-card>
+      <div style="margin-top: 24px;">
+        <nz-table
+          #ajaxTable
+          nzShowSizeChanger
+          nzBordered
+          [nzFrontPagination]="false"
+          [nzData]="listOfData"
+          [nzLoading]="loading"
+          [nzTotal]="total"
+          [nzTitle]="title"
+          [(nzPageIndex)]="pageIndex"
+          [(nzPageSize)]="pageSize"
+          (nzPageIndexChange)="searchData()"
+          (nzPageSizeChange)="searchData(true)"
+        >
+          <thead>
+          <tr>
+            <th nzShowSort nzSortKey="id" nzWidth="100px">ID</th>
+            <th nzShowSort nzSortKey="name" nzWidth="150px"><span>字段</span></th>
+            <th nzShowSort nzSortKey="type" nzWidth="150px"><span>类型</span></th>
+            <th nzShowSort nzSortKey="annotations"><span>注解</span></th>
+            <th nzShowSort nzSortKey="annotationBtn" nzWidth="150px"><span>添加注解</span></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of ajaxTable.data">
+            <td
+              nzShowCheckbox
+              (nzCheckedChange)="getField(data)"
+            ></td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.type }}</td>
+
+            <td>
+              <div>
+                <app-annotation-tag [filedAnnotationMap]="filedAnnotationMap" [rowPropertyName]="data.name"
+                                    [isTableRowTag]="true"></app-annotation-tag>
+              </div>
+            </td>
+
+            <td>
+              <div
+                *ngIf="(!isPressAddAnnotation||(isPressAddAnnotation&&rowPropertyName!==null&&data.name!==rowPropertyName))">
+                <button nz-button nzType="primary" [disabled]="isPressAddAnnotation"
+                        (click)="handleCreateAnnotation(data.name)">创建注解
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </nz-table>
+        <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal"
+                  (nzOnOk)="handleOk()">
+          <app-annotation-dialog></app-annotation-dialog>
+        </nz-modal>
+      </div>
+    </div>
   </div>
 </nz-card>

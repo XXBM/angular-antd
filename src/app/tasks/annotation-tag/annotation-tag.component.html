@@ -1,0 +1,47 @@
+<div>
+  <!--判断是不是显示后面的按钮，如果带按钮说明是在表格里面，不带按钮是在表格的顶部-->
+  <div *ngIf="!isTableRowTag" class="topNzTag">
+    <div *ngIf="annotationTags">
+      <div *ngIf="isCheckable">
+        <nz-tag
+          *ngFor="let tag of annotationTags; let i = index"
+          [nzMode]="'checkable'"
+          [nzChecked]="tag.isChecked === 1"
+          (nzCheckedChange)="handleCheckChange($event, tag)"
+          (nzAfterClose)="handleClose(tag)"
+        >
+          {{ sliceTagName(tag.simpleAnnotation) }}
+        </nz-tag>
+        <button nz-button nzType="primary" (click)="handleConfirm()">确定</button>
+      </div>
+
+      <div *ngIf="!isCheckable">
+        <nz-tag
+          *ngFor="let tag of annotationTags; let i = index"
+          [nzMode]="'default'"
+          (nzAfterClose)="handleClose(tag)"
+        >
+          {{ sliceTagName(tag.simpleAnnotation) }}
+        </nz-tag>
+      </div>
+
+    </div>
+  </div>
+  <!--要显示的创建按钮的时候-->
+  <div *ngIf="isTableRowTag">
+    <div *ngIf="rowPropertyName!=null&&filedAnnotationMap.get(rowPropertyName)!=null&&filedAnnotationMap.get(rowPropertyName).size>=0">
+      <nz-tag
+        class="tableNzTag"
+        *ngFor="let tag of filedAnnotationMap.get(rowPropertyName); "
+        [nzMode]="'closeable'"
+        (nzAfterClose)="handleClose(tag)"
+      >
+        {{ sliceTagName(tag.simpleAnnotation) }}
+      </nz-tag>
+    </div>
+    <!--只有在表格里面嵌套的时候才显示注解按钮-->
+
+  </div>
+  <ng-content></ng-content>
+</div>
+

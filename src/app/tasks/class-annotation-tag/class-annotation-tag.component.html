@@ -1,0 +1,13 @@
+<div>
+    <div *ngIf="classAnnotationTags" class="topNzTag">
+        <nz-tag
+          *ngFor="let tag of classAnnotationTags let i = index;"
+          [nzMode]="'checkable'"
+          [nzChecked]="tag.isChecked === 1"
+          (nzCheckedChange)="handleCheckChange($event, tag)"
+        >
+          {{ sliceTagName(tag.simpleAnnotation) }}
+        </nz-tag>
+    </div>
+    <ng-content></ng-content>
+</div>
