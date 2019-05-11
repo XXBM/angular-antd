@@ -156,7 +156,8 @@ export class AnnotationComponent implements OnInit {
       this.classAnnotationTagComponent.selectedClassAnnotationTags.forEach(
         ((value, value2, set) => this.selectedClassAnnotationTags.push(value.simpleAnnotation)));
       this.addAnnotationService.submitAnnotation(
-        this.title, this.selectedClassAnnotationTags, this.selectedVariableAnnotationTags).subscribe();
+        this.title, this.selectedClassAnnotationTags, this.selectedVariableAnnotationTags).subscribe(
+          value => {if (value.msg === 'success') { this.message.info('注解添加成功'); } else {this.message.info('注解添加失败'); } });
     }
   }
 

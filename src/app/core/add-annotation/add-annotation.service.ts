@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { AnnotationTag } from '../../tasks/annotation-tag/annotation-tag';
+import {AddAnnotationResponse} from './add-annotation-response';
 
 
 @Injectable({
@@ -37,13 +38,13 @@ export class AddAnnotationService {
   }
 
   /*提交所有的注解*/
-  submitAnnotation(className: string, classAnnotations: string[], variableAnnotations: Map<string, string[]>): Observable<{}> {
+  submitAnnotation(className: string, classAnnotations: string[], variableAnnotations: Map<string, string[]>): Observable<AddAnnotationResponse> {
     // const params = new SubmitAnnotationEntity(className, classAnnotations, variableAnnotations);
     const params = new HttpParams()
       .append('className', className)
       .append('classAnnotations', `${classAnnotations}`)
       .append('variableAnnotations', JSON.stringify(Array.from(variableAnnotations)));
-    return this.http.post(this.addAnnotationsUrl, params);
+    return this.http.post<AddAnnotationResponse>(this.addAnnotationsUrl, params);
   }
 
 
