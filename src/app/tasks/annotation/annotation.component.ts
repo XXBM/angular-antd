@@ -3,9 +3,9 @@ import {TestService} from '../../core/test/test.service';
 import {TableService} from '../../core/test/table.service';
 import {AddAnnotationService} from '../../core/add-annotation/add-annotation.service';
 import {NzMessageService} from 'ng-zorro-antd';
-import { AnnotationTag } from '../annotation-tag/annotation-tag';
-import {AnnotationTagComponent} from '../annotation-tag/annotation-tag.component';
-import {ClassAnnotationTagComponent} from '../class-annotation-tag/class-annotation-tag.component';
+import { AnnotationTag } from './annotation-tag/annotation-tag';
+import {AnnotationTagComponent} from './annotation-tag/annotation-tag.component';
+import {ClassAnnotationTagComponent} from './class-annotation-tag/class-annotation-tag.component';
 
 
 

@@ -11,8 +11,8 @@ import {DaoComponent} from './generate/dao/dao.component';
 import {ServiceComponent} from './generate/service/service.component';
 import {ControllerComponent} from './generate/controller/controller.component';
 import {AnnotationDialogComponent} from './annotation/annotation-dialog/annotation-dialog.component';
-import { AnnotationTagComponent } from './annotation-tag/annotation-tag.component';
-import { ClassAnnotationTagComponent } from './class-annotation-tag/class-annotation-tag.component';
+import { AnnotationTagComponent } from './annotation/annotation-tag/annotation-tag.component';
+import { ClassAnnotationTagComponent } from './annotation/class-annotation-tag/class-annotation-tag.component';
 
 @NgModule({
   imports: [

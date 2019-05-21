@@ -1,5 +1,6 @@
 <div *ngIf="daos">
   <nz-transfer
+    style="margin-left: 230px"
     [nzDataSource]="daos"
     [nzTitles]="['Dao', 'Service']"
     (nzSelectChange)="select($event)"

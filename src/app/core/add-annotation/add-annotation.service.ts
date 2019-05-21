@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import { AnnotationTag } from '../../tasks/annotation-tag/annotation-tag';
+import { AnnotationTag } from '../../tasks/annotation/annotation-tag/annotation-tag';
 import {AddAnnotationResponse} from './add-annotation-response';
 
 
