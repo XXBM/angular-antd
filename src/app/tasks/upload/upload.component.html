@@ -17,6 +17,7 @@
     nzType="drag"
     [nzMultiple]="true"
     [nzFileList]="fileList"
+    [nzFileType]="fileType"
     [nzLimit]="10"
     nzAction="/automation/moreFileUpload"
     (nzChange)="handleChange($event)"
@@ -26,9 +27,9 @@
     <p class="ant-upload-drag-icon">
       <i nz-icon nzType="inbox"></i>
     </p>
-    <p class="ant-upload-text">Click or drag file to this area to upload</p>
+    <p class="ant-upload-text">可点击 可拖拽</p>
     <p class="ant-upload-hint">
-      Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+      支持上传Java类源文件
     </p>
   </nz-upload>
   </div>

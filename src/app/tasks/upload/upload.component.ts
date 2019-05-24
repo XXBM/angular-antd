@@ -9,6 +9,7 @@ import {UploadService} from '../../core/upload/upload.service';
 })
 export class UploadComponent implements OnInit {
   fileList: UploadFile[any];
+  fileType: 'java';
 
   constructor(private msg: NzMessageService,
               private uploadService: UploadService) { }
@@ -37,6 +38,7 @@ export class UploadComponent implements OnInit {
     if (status === 'done') {
       this.msg.success(`${file.name} file uploaded successfully.`);
     } else if (status === 'error') {
+      this.getAllDomains();
       this.msg.error(`${file.name} file upload failed.`);
     }
   }
@@ -49,4 +51,5 @@ export class UploadComponent implements OnInit {
       }
       return false;
   }
+
 }
